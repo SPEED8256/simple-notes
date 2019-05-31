@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">
+        SimpleNotes
+    </a>
+</nav>
+
+
+<div class="container text-right">
+
+    <!--Add note button-->
+    <br>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNote">Add note</button>
+    <br>
+</div>
+
+    <!-- Add note modal -->
+    <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="addNote" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form th:action="@{/}" th:object="${note}" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Title" th:field="${note.title}">
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Content</label>
+                            <textarea class="form-control" id="content" rows="3" th:field="${note.content}"></textarea>
+                        </div>
+                        <button class="submit btn btn-primary">Add Note</button>
+                        <button type="reset" class="btn btn-danger">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<div class="container ">
+    <br>
+    <div th:if="${#lists.isEmpty(allNotes)}">
+        <h2>No notes found.</h2>
+    </div>
+    <div class="accordion" id="notes">
+        <th:block th:each="note : ${allNotes}">
+        <div class="card">
+            <div class="card-header" th:attr="id=${note.id}">
+                <div class="row justify-content-between">
+                    <div class="col-9">
+                <h2 class="mb-0">
+                    <button th:text="${note.title}" class="btn btn-link" type="button" data-toggle="collapse" th:attrappend="data-target='#note'+${note.id}, aria-controls=${note.id}" aria-expanded="true">
+                        Collapsible Group Item #1
+                    </button></h2>
+
+                    </div>
+
+                    <!--Butttons-->
+                    <div class="col-3">
+                        <!--Edit note button-->
+                        <a class="btn btn-primary" type="button" th:href="'/update/'+${note.id}">Update</a>
+                        <!--Remove button-->
+                        <a class="btn btn-danger" type="button" th:href="'/delete/'+${note.id}">Remove</a>
+                    </div>
+                </h2>
+                </div>
+            </div>
+
+            <!--Note Content-->
+            <div th:attr="id='note'+${note.id}" class="collapse" th:attrprepend="aria-labelledby=${note.id}" data-parent="#notes">
+                <div class="card-body" >
+                    <!--Date-->
+                    <span class="badge badge-secondary">Updated on: [(${#dates.format(note.creationTime,'dd-MM-yyyy HH:mm')})] </span><br>
+                    <!--Content-->
+                    [(${note.content})]
+                </div>
+            </div>
+        </div>
+        </th:block>
+    </div>
+
+</div>
+
+
+
+<!--Bootstrap Scripts-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
