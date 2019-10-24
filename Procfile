@@ -1,1 +1,1 @@
-java -jar target/simple-notes-0.0.1-SNAPSHOT.jar
+java -jar target/simple-notes-0.0.1-SNAPSHOT.jar --server.port=$PORT
