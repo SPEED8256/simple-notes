@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: dk.kea.tech.project.simplenotes.SimpleNotesApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.954 s - in dk.kea.tech.project.simplenotes.SimpleNotesApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.998 s - in dk.kea.tech.project.simplenotes.SimpleNotesApplicationTests
