@@ -1,0 +1,1 @@
+java -jar target/simple-notes-0.0.1-SNAPSHOT.jar
