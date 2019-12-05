@@ -1,0 +1,4 @@
+dk\kea\tech\project\simplenotes\Repository\NoteRepository.class
+dk\kea\tech\project\simplenotes\SimpleNotesApplication.class
+dk\kea\tech\project\simplenotes\Model\Note.class
+dk\kea\tech\project\simplenotes\Controller\NotesController.class

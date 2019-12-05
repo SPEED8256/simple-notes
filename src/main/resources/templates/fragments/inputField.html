@@ -1,0 +1,32 @@
+<html>
+<body>
+
+<div class="invalid-feedback" th:text="*{__${name}__}">
+    Please choose a username.
+</div>
+<form>
+
+    <th:block th:fragment="input (label, name, type)">
+        <div th:with="valid=${!#fields.hasErrors(name)}"
+             th:class="${'form-group row' + (valid ? '' : ' has-error')}"
+             class="form-group">
+            <label class="col-sm-2 col-form-label" th:text="${label}">Label</label>
+            <div class="col-sm-10">
+                <div th:switch="${type}">
+                    <input th:case="'text'" class="form-control" th:classappend="${valid} ? is-valid : is-invalid" th:placeholder="${label}" type="text" th:field="*{__${name}__}" />
+                    <input th:case="'date'" class="form-control" th:classappend="${valid} ? is-valid : is-invalid" type="text" th:field="*{__${name}__}"
+                           placeholder="YYYY-MM-DD" title="Enter a date in this format: YYYY-MM-DD"
+                           pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"/>
+                    <input th:case="'password'" class="form-control" th:classappend="${valid} ? is-valid : is-invalid" th:placeholder="${label}" type="password" th:field="*{__${name}__}" />
+                    <th:block th:if="${!valid}">
+                        <div class="invalid-feedback" th:errors="*{__${name}__}" >Incorrect date</div>
+                        <!--                    <span class="alert alert-danger" th:errors="*{__${name}__}">Error</span>-->
+                    </th:block>
+                </div>
+
+            </div>
+        </div>
+    </th:block>
+</form>
+</body>
+</html>

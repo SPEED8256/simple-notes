@@ -1,0 +1,85 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      th:fragment="layout (template, menu)">
+
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Simple Notes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+    <a class="navbar-brand" href="/">Simple Notes</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <th:block>
+                <li th:fragment="menuItem (path,active,text)" class="nav-item" th:classappend="${active==menu ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{__${path}__}"  th:text="${text}">Template</a>
+                </li>
+            </th:block>
+            <li th:replace="::menuItem ('/','home','Home')" class="nav-item" th:classappend="${active==menu ? 'active' : ''}">
+                <a class="nav-link" th:href="@{__${path}__}"  th:text="${text}">Template</a>
+            </li>
+<!--            <th:block sec:authorize="isAuthenticated()">-->
+<!--                <li th:replace="::menuItem ('/profile','profile','My Profile')" class="nav-item" th:classappend="${active==menu ? 'active' : ''}">-->
+<!--                    <a class="nav-link" th:href="@{__${path}__}"  th:text="${text}">Template</a>-->
+<!--                </li>-->
+<!--            </th:block>-->
+
+        </ul>
+        <th:block sec:authorize="isAnonymous()">
+        <div class="navbar-nav ml-auto">
+
+                <li th:replace="::menuItem ('/login','login','Login')" class="nav-item" th:classappend="${active==menu ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{__${path}__}"  th:text="${text}">Template</a>
+                </li>
+                <li th:replace="::menuItem ('/register','register','Register')" class="nav-item" th:classappend="${active==menu ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{__${path}__}"  th:text="${text}">Template</a>
+                </li>
+        </div>
+        </th:block>
+        <th:block th:if="${active==home}" sec:authorize="isAuthenticated()">
+        <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/search}" th:object="${search}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        </th:block>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="container xd-container">
+
+        <th:block th:include="${template}"/>
+
+        <br/>
+        <br/>
+        <div class="container fixed-bottom">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>Made by Alin Plamadeala</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

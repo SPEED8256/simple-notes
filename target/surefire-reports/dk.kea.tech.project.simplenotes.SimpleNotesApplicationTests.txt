@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: dk.kea.tech.project.simplenotes.SimpleNotesApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.998 s - in dk.kea.tech.project.simplenotes.SimpleNotesApplicationTests
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.711 s <<< FAILURE! - in dk.kea.tech.project.simplenotes.SimpleNotesApplicationTests
+contextLoads(dk.kea.tech.project.simplenotes.SimpleNotesApplicationTests)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+Caused by: java.sql.SQLNonTransientConnectionException: Cannot load connection class because of underlying exception: com.mysql.cj.exceptions.WrongArgumentException: Failed to parse the host:port pair '${RDS.HOSTNAME}:${RDS.PORT}'.
+Caused by: com.mysql.cj.exceptions.UnableToConnectException: Cannot load connection class because of underlying exception: com.mysql.cj.exceptions.WrongArgumentException: Failed to parse the host:port pair '${RDS.HOSTNAME}:${RDS.PORT}'.
+Caused by: com.mysql.cj.exceptions.WrongArgumentException: Failed to parse the host:port pair '${RDS.HOSTNAME}:${RDS.PORT}'.
+Caused by: java.lang.NumberFormatException: For input string: "${RDS.PORT}"
+

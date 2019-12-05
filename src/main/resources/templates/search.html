@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      th:replace="~{fragments/layout :: layout (~{::body},'search')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+
+<body>
+
+<div class="container" >
+    <div th:if="${#lists.isEmpty(search)}">
+    <h2>No notes found.</h2></div>
+
+    <th:block th:if="${not #lists.isEmpty(search)}">
+    <div class="accordion" id="notes">
+        <th:block th:each="note : ${search}">
+            <div class="card">
+                <div class="card-header" th:attr="id=${note.id}">
+                    <div class="row justify-content-between">
+                        <div class="col-9">
+                            <h2 class="mb-0">
+                                <button th:text="${note.title}" class="btn btn-link" type="button" data-toggle="collapse" th:attrappend="data-target='#note'+${note.id}, aria-controls=${note.id}" aria-expanded="true">
+                                    Collapsible Group Item #1
+                                </button></h2>
+
+                        </div>
+
+                        <!--Butttons-->
+                        <div class="col-3">
+                            <!--Edit note button-->
+                            <a class="btn btn-primary" type="button" th:href="'/update/'+${note.id}">Update</a>
+                            <!--Remove button-->
+                            <a class="btn btn-danger" type="button" th:href="'/delete/'+${note.id}">Remove</a>
+                        </div>
+                        </h2>
+                    </div>
+                </div>
+
+                <!--Note Content-->
+                <div th:attr="id='note'+${note.id}" class="collapse" th:attrprepend="aria-labelledby=${note.id}" data-parent="#notes">
+                    <div class="card-body" >
+                        <!--Date-->
+                        <span class="badge badge-secondary">Updated on: [(${#dates.format(note.creationTime,'dd-MM-yyyy HH:mm')})] </span><br>
+                        <!--Content-->
+                        [(${note.content})]
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+    </th:block>
+</div>
+</th:block>
+
+
+<br>
+<!--<div class="row justify-content-center ">-->
+<!--    <nav aria-label="Page navigation">-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item" th:classappend="${pageNumber==notePage.number + 1} ? active" th:if="${notePage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">-->
+<!--                <a class="page-link" th:href="@{/(size=${notePage.size}, page=${pageNumber})}"-->
+<!--                   th:text=${pageNumber}>Previous</a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</div>-->
+
+
+</body>
+</html>
