@@ -5,7 +5,7 @@
 ## Live version: 
 http://lbsimplenotes-347591910.eu-central-1.elb.amazonaws.com/
 ## Front-end: 
-Bootstrap
+- Bootstrap
 ## Back-end: 
 - Spring Boot
 - Hibernate
