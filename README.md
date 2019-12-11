@@ -1,6 +1,11 @@
-# simple-notes CRUD for Tech 1
-# Live version on: http://notes.eu-north-1.elasticbeanstalk.com/
+# SimpleNotes
+# Live version on: http://lbsimplenotes-347591910.eu-central-1.elb.amazonaws.com/
 ## Simple notes web application.
-## Front-end: Bootstrap
-## Back-end: Spring Boot
-
+## Front-end: 
+Bootstrap
+## Back-end: 
+Spring Boot
+Hibernate
+Hibernate Search with Lucene
+## Database:
+MySQL
