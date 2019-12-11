@@ -68,11 +68,11 @@ public class NotesController {
 
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String search(@RequestParam(value = "search", required = false) String q, Model model) {
+    public String search(@RequestParam(value = "search", required = false) String q, Model model, Principal principal) {
         List<Note> searchResults = null;
         System.out.println("test");
         try {
-            searchResults = searchservice.fuzzySearch(q);
+            searchResults = searchservice.fuzzySearch(q, userService.findByUsername(principal.getName()));
 
 
         } catch (Exception ex) {
@@ -113,8 +113,8 @@ public class NotesController {
 
 
     @PostMapping("/update")
-    public String saveEditTheater(@ModelAttribute Note note) {
-
+    public String saveEditTheater(@ModelAttribute Note note, Principal principal) {
+        note.setUser(userService.findByUsername(principal.getName()));
         note.setContent(note.getContent().replaceAll("\n","<br />"));
         note.setCreationTime(new Date());
         noteRepository.save(note);

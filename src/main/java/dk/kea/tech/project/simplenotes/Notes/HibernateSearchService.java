@@ -1,5 +1,6 @@
 package dk.kea.tech.project.simplenotes.Notes;
 
+import dk.kea.tech.project.simplenotes.User.User;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
@@ -38,14 +39,22 @@ public class HibernateSearchService {
     }
 
     @Transactional
-    public List<Note> fuzzySearch(String searchTerm) {
+    public List<Note> fuzzySearch(String searchTerm, User user) {
 
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(centityManager);
         QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Note.class).get();
         Query luceneQuery = qb.keyword().fuzzy().withEditDistanceUpTo(1).withPrefixLength(1).onFields("title", "content")
                 .matching(searchTerm).createQuery();
+        Query combinedQuery = qb
+                .bool()
+                .must(qb.keyword().fuzzy().withEditDistanceUpTo(1).withPrefixLength(1).onFields("title", "content")
+                        .matching(searchTerm).createQuery())
+                .must(qb.keyword()
+                        .onField("user.username").matching(user.getUsername())
+                        .createQuery())
+                .createQuery();
 
-        javax.persistence.Query jpaQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, Note.class);
+        javax.persistence.Query jpaQuery = fullTextEntityManager.createFullTextQuery(combinedQuery, Note.class);
 
         // execute search
 

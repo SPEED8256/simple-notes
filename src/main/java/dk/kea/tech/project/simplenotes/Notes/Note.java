@@ -2,7 +2,9 @@ package dk.kea.tech.project.simplenotes.Notes;
 
 import dk.kea.tech.project.simplenotes.User.User;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.FieldBridge;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,6 +20,7 @@ public class Note {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @IndexedEmbedded
     private User user;
 
     @Lob

@@ -2,6 +2,8 @@ package dk.kea.tech.project.simplenotes.User;
 
 
 import dk.kea.tech.project.simplenotes.Notes.Note;
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,6 +17,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Field(index= Index.YES)
     private String username;
 
     private String password;
@@ -23,6 +26,7 @@ public class User {
     @Transient
     private String passwordConfirm;
 
+    @ContainedIn
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Note> notes;
 
