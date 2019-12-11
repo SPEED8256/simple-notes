@@ -1,5 +1,6 @@
 # SimpleNotes
-# Live version on: http://lbsimplenotes-347591910.eu-central-1.elb.amazonaws.com/
+## Live version: 
+http://lbsimplenotes-347591910.eu-central-1.elb.amazonaws.com/
 ## Simple notes web application.
 ## Front-end: 
 Bootstrap
