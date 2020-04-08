@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    url: jdbc:postgres://fjjczxilrwqrvb:cb797305b8de19e5e54664a9d5f21b60a8b4f9a369cb95fbcfc7a931756f8630@ec2-54-247-118-139.eu-west-1.compute.amazonaws.com:5432/d4pirkpa0ojpvt

@@ -1,7 +1,0 @@
--------------------------------------------------------------------------------
-Test set: dk.kea.tech.project.simplenotes.SimpleNotesApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.183 s <<< FAILURE! - in dk.kea.tech.project.simplenotes.SimpleNotesApplicationTests
-initializationError(dk.kea.tech.project.simplenotes.SimpleNotesApplicationTests)  Time elapsed: 0.009 s  <<< ERROR!
-java.lang.Exception: No runnable methods
-
