@@ -1,14 +1,19 @@
 # SimpleNotes
-## Notes CRUD with authentication.
-
+A Spring Boot web application that allows storing your notes.
+The search function is implemented using Apache Lucene.
 
 ## Live version: 
-http://lbsimplenotes-347591910.eu-central-1.elb.amazonaws.com/
-## Front-end: 
-- Bootstrap
+[Simple Notes](https://app-simple-notes.herokuapp.com/)
+
+Demo credentials:
+* Username: `johndoe`
+* Password: `johndoe123`
 ## Back-end: 
 - Spring Boot
 - Hibernate
 - Hibernate Search with Lucene
+## Front-end: 
+- Bootstrap
+
 ## Database:
 - MySQL
